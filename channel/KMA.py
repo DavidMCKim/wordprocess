@@ -18,11 +18,12 @@ class KMA(): #KMC(Korea Meteorological Administration):기상청
     def Parsing_Weather(self):
         try:
             weather = pd.read_html(self.res.text ,header = 0,encoding='euc-kr')[0]
+            print()
             
         except Exception as e:
             print(e)
             
-        return 
+        return weather
 
     def Parsing_Temparature(self, word):
         try:
@@ -30,5 +31,5 @@ class KMA(): #KMC(Korea Meteorological Administration):기상청
         except Exception as e:
             print(e)
 
-        return 
+        return temparature
             

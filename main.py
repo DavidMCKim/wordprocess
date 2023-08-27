@@ -1,5 +1,6 @@
 from channel.KMA import KMA
 from channel.Google import GoogleTrend
+from channel.Wordprocess import Wordprocess
 
 if __name__ == '__main__':
     # google = GoogleTrend()
@@ -12,7 +13,13 @@ if __name__ == '__main__':
 
     #     print()
     
-    kma = KMA()
-    weather = kma.Parsing_Weather()
-    temparatuer = kma.Parsing_Temparature()
+    # kma = KMA()
+    # weather = kma.Parsing_Weather()
+    # temparatuer = kma.Parsing_Temparature()
+
+    wordprocess = Wordprocess()
+    wordprocess.WriteBlog()
+
+
+    
     
