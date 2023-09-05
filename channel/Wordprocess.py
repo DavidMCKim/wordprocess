@@ -7,6 +7,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup as bs
 from datetime import datetime, timedelta
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from common.Chromedriver import ChromeDriver
 from common.MakeHtml import MakeHtml
 from selenium.webdriver.chrome.service import Service
@@ -40,7 +41,18 @@ class Wordprocess():
                 content = '본문 예시'
                 self.driver.find_element(By.ID, 'content').send_keys(content)
 
-                # 포커스 키워드 작성
+                # 포커스 키워드 작성 
+                self.driver.find_element(By.CLASS_NAME, 'tagify__input').send_keys('mckim')
+                self.driver.find_element(By.CLASS_NAME, 'tagify__input').send_keys(Keys.ENTER)
+
+                self.driver.find_element(By.CLASS_NAME, 'tagify__input').send_keys('mckim')
+                self.driver.find_element(By.CLASS_NAME, 'tagify__input').send_keys(Keys.ENTER)
+
+                self.driver.find_element(By.CLASS_NAME, 'tagify__input').send_keys('mckim')
+                self.driver.find_element(By.CLASS_NAME, 'tagify__input').send_keys(Keys.ENTER)
+
+                self.driver.find_element(By.CLASS_NAME, 'tagify__input').send_keys('mckim')
+                self.driver.find_element(By.CLASS_NAME, 'tagify__input').send_keys(Keys.ENTER)
 
                 # 이미지 추가1
             
@@ -66,6 +78,7 @@ class Wordprocess():
             pw_element = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((By.ID, "user_pass"))
             )
+
             pw_element.send_keys("패스워드")
             time.sleep(2.5)
 

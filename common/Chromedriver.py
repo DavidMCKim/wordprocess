@@ -5,7 +5,7 @@ import zipfile
 import requests
 from bs4 import BeautifulSoup
 
-class Chromedriver():
+class ChromeDriver():
     def __init__(self) -> None:
         print()
         

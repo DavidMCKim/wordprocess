@@ -5,11 +5,11 @@ import json
 import pandas as pd
 from selenium import webdriver
 from bs4 import BeautifulSoup as bs
+from common.MakeHtml import MakeHtml
 from datetime import datetime, timedelta
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from common.Chromedriver import ChromeDriver
-from common.MakeHtml import MakeHtml
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
@@ -35,21 +35,25 @@ class Miricampas():
             )
             id_element.click()
 
-            self.driver.find_element(By.ID,'loginPopup').find_elements(By.CLASS_NAME,'KoSocialSignSelectBoxView__Logo-sc-e23ab5c5-4')[2].click()
+            self.driver.find_element(By.ID,'loginPopup').find_elements(By.CLASS_NAME,'KoSocialSignSelectBoxView__Logo-sc-e23ab5c5-4')[0].click()
 
+            # 카카오톡 로그인 팝업창으로 창 전환
+            self.driver.switch_to_window(self.driver.window_handles[1])
+            self.driver.find_element(By.ID,'loginId--1').send_keys("wedaehan96@naver.com")
+            self.driver.find_element(By.ID,'password--2').send_keys("Rkswlska96!^^")
+            self.driver.find_element(By.ID,'password--2').send_keys(Keys.ENTER)
 
-            id_element.send_keys("아이디")
-            time.sleep(2.5)
+            self.driver.switch_to_window(self.driver.window_handles[0])
+            self.driver.find_element(By.ID,'btnDisAgreeStayLogin').send_keys(Keys.ENTER)
 
-            pw_element = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.ID, "user_pass"))
-            )
+            # 템플릿 클릭
+            self.driver.find_elements(By.CLASS_NAME,'WorkspaceAsideMenuBarView__Tab-sc-f1e2e209-2')[1].click()
+            self.driver.find_element(By.CLASS_NAME,'template_search_input').send_keys("대출")
+            self.driver.find_element(By.CLASS_NAME,'template_search_input').send_keys(Keys.ENTER)
 
-            pw_element.send_keys("패스워드")
-            time.sleep(2.5)
+            self.driver.find_elements(By.CLASS_NAME,'template_item_container')[0].click()
+            self.driver.find_element(By.CLASS_NAME,'use_template_button').click()
 
-            self.driver.find_element(By.ID, "wp-submit").click()
-            time.sleep(10)
         except Exception as e:
             result = False
             print(f'로그인 실패  ::  {e}')
